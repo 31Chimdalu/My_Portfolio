@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chimdalu Akabogu | Portfolio</title>
+  <style>
+    /* RESET */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      transition: background 0.4s, color 0.4s;
+      background: #d6d4ca;
+    }
+    h1, h2, h3 { margin-bottom: 15px; }
+    section { padding: 60px 20px; }
+
+    a { text-decoration: none; color: inherit; }
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      border-radius: 6px;
+      background: #007BFF;
+      color: #fff;
+      transition: background 0.3s;
+    }
+    .btn:hover { background: #0056b3; }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      z-index: 1000;
+    }
+    header h1 { font-size: 20px; }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    nav ul li a { color: #fff; }
+    .menu-toggle { display: none; cursor: pointer; }
+
+    @media (max-width: 768px) {
+      nav ul { 
+        display: none; 
+        flex-direction: column; 
+        background: rgba(0,0,0,0.8); 
+        position: absolute; 
+        top: 60px; right: 20px;
+        padding: 10px;
+      }
+      nav ul.show { display: flex; }
+      .menu-toggle { display: block; }
+      header h1 { display: none; }
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      background: url("./images/emile-perron-xrVDYZRGdw4-unsplash.jpg") center/cover no-repeat;
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top:0; left:0; width:100%; height:100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero img {
+      width: 150px; height: 150px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      margin-bottom: 20px;
+    }
+
+    /* ABOUT */
+    .about {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      background: url("./images/florian-olivo-4hbJ-eymZ1o-unsplash.jpg") center/cover no-repeat;
+      position: relative;
+    }
+    .about::after {
+      content: "";
+      position: absolute;
+      top:0; left:0; width:100%; height:100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8));
+    }
+    .about .card {
+      position: relative; z-index: 1;
+      background: rgba(0,0,0,0.6);
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 700px;
+    }
+
+    /* SKILLS */
+    #skills {
+      text-align: center;
+      position: relative;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center;
+    }
+    #skills .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+      width: 100%;
+      padding: 0 10px;
+    }
+    #skills .card {
+      background: #fdfcf7; /* creamy off-white */
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    #skills .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+    #skills img { width: 50px; margin-bottom: 10px; }
+    .badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: #007BFF; color:#fff;
+      font-size: 13px;
+    }
+
+    /* PROJECTS */
+    #projects {
+      text-align: center;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center;
+    }
+    #projects .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: auto;
+      width: 100%;
+      padding: 0 10px;
+    }
+    #projects .card {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background: rgba(255,255,255,0.95);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    #projects .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); }
+    #projects .card img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    /* CONTACT */
+    #contact {
+      text-align: center;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center;
+    }
+    .social-links {
+      display: flex; justify-content: center; gap: 15px;
+      margin: 15px 0;
+    }
+    .social-links a {
+      font-size: 24px;
+      color: inherit;
+    }
+    #contact button {
+      background: #007BFF; border: none;
+      padding: 10px 20px; border-radius: 6px;
+    }
+    #contact button a { color:#fff; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #111;
+      color: #fff;
+    }
+
+    /* BACKGROUNDS */
+    /* body.light main {
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><text x='0' y='15' font-size='14'>}</text><text x='20' y='35' font-size='14'>&lt;/&gt;</text></svg>");
+      background-repeat: repeat;
+      background-size: 40px 40px;
+    } */
+
+    body.dark main {
+      background: url("https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=1600&auto=format&fit=crop&q=80") center/cover no-repeat;
+      background-attachment: fixed;
+      opacity: 0.9;
+    }
+  </style>
+  <!-- Icons (Font Awesome) -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body class="light">
+  <header>
+    <h1>Chimdalu</h1>
+    <div class="menu-toggle">☰</div>
+    <nav>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button id="toggleMode">🌙</button>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <img src="my-photo.jpg" alt="Profile Picture">
+        <h1>Hi, I’m Chimdalu Akabogu</h1>
+        <p>Web Developer | Always Building, Always Learning 🚀</p>
+        <!-- <button><a href="cv.pdf" download>Download CV</a></button> -->
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="card">
+        <h2>About Me</h2>
+        <p>
+          Hi, I’m Chimdalu 👋 — a Computer Science graduate and passionate web developer.  
+          I’m confident in HTML, CSS, JavaScript, Node.js, and Bootstrap, and I’m currently leveling up with Express, PHP, MySQL, React, and Tailwind CSS.  
+          I enjoy building clean, user-friendly projects that make life easier, and I’m always curious, adaptable, and learning.  
+        </p>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <h2>My Skills</h2>
+      <div class="skills-grid">
+        <div class="card">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+          <h3>HTML</h3>
+          <span class="badge">Pro</span>
+        </div>
+        <div class="card">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
+          <h3>CSS</h3>
+          <span class="badge">Pro</span>
+        </div>
+        <div class="card">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+          <h3>JavaScript</h3>
+          <span class="badge">Intermediate</span>
+        </div>
+        <div class="card">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+          <h3>Node.js</h3>
+          <span class="badge">Intermediate</span>
+        </div>
+        <div class="card">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap">
+          <h3>Bootstrap</h3>
+          <span class="badge">Intermediate</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="project-grid">
+        <div class="card">
+          <img src="./images/pankaj-patel-fvMeP4ml4bU-unsplash.jpg" alt="Project 1 Screenshot">
+          <h3>Project 1</h3>
+          <p>Short description of the project. Replace this with your own project details.</p>
+          <a href="#" class="btn">🔗 View Project</a>
+        </div>
+        <div class="card">
+          <img src="./images/pankaj-patel-fvMeP4ml4bU-unsplash.jpg" alt="Project 2 Screenshot">
+          <h3>Project 2</h3>
+          <p>Short description of the project. Replace this with your own project details.</p>
+          <a href="#" class="btn">🔗 View Project</a>
+        </div>
+        <div class="card">
+          <img src="./images/pankaj-patel-fvMeP4ml4bU-unsplash.jpg" alt="Project 3 Screenshot">
+          <h3>Project 3</h3>
+          <p>Short description of the project. Replace this with your own project details.</p>
+          <a href="#" class="btn">🔗 View Project</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fas fa-envelope"></i></a>
+      </div>
+      <button><a href="cv.pdf" download>Download CV</a></button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Chimdalu Akabogu. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Toggle nav menu
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+      document.querySelector('nav ul').classList.toggle('show');
+    });
+
+    // Light/Dark mode toggle
+    document.getElementById('toggleMode').addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      document.body.classList.toggle('light');
+      document.getElementById('toggleMode').textContent =
+        document.body.classList.contains('dark') ? '☀️' : '🌙';
+    });
+  </script>
+</body>
+</html>
